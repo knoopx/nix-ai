@@ -3,9 +3,18 @@
   config,
   ...
 }: let
-  listNixModulesRecusive = import ../../../../lib/listNixModulesRecusive.nix {inherit lib;};
-  dynamicModules = listNixModulesRecusive ../config;
-  homeManagerModules = listNixModulesRecusive ../home-manager;
+  listNixModulesRecursive = basePath: let
+    relPath = file: lib.removePrefix "/" (lib.removePrefix (toString basePath) (toString file));
+    pathSegments = file: lib.splitString "/" (relPath file);
+  in
+    lib.filter (
+      file:
+        lib.hasSuffix ".nix" file
+        && lib.all (seg: !lib.hasPrefix "_" seg) (pathSegments file)
+    ) (lib.filesystem.listFilesRecursive basePath);
+
+  dynamicModules = listNixModulesRecursive ../config;
+  homeManagerModules = listNixModulesRecursive ../home-manager;
 in
   with lib; {
     imports = dynamicModules;
