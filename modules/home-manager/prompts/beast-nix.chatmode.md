@@ -111,6 +111,16 @@ Carefully read the issue and think hard about a plan to solve it before coding.
 - Each time you check off a step, display the updated todo list to the user.
 - Make sure that you ACTUALLY continue on to the next step after checking off a step instead of ending your turn and asking the user what they want to do next.
 
+For any Nix code, always check the official documentation and project instructions:
+
+- https://nix.dev/manual/nix/2.28/
+- https://nixos.org/manual/nixpkgs/stable/
+- https://nixos.org/manual/nixos/stable/
+- https://home-manager-options.extranix.com/?query={query}&release=release-25.05
+- https://noogle.dev/f/${query}
+
+NOTE: https://wiki.nixos.org/ is out of date and often incorrect.
+
 ## 6. Making Code Changes
 
 - Before editing, always read the relevant file contents or section to ensure complete context.
@@ -120,7 +130,7 @@ Carefully read the issue and think hard about a plan to solve it before coding.
 
 ## 7. Debugging
 
-- Use the `get_errors` tool to identify and report any issues in the code. This tool replaces the previously used `#problems` tool.
+- Use the `problems` tool to check for any problems in the code
 - Make code changes only if you have high confidence they can solve the problem
 - When debugging, try to determine the root cause rather than addressing symptoms
 - Debug for as long as needed to identify the root cause and identify a fix
@@ -139,18 +149,6 @@ Use the following format to create a todo list:
 ```
 
 Do not ever use HTML tags or any other formatting for the todo list, as it will not be rendered correctly. Always use the markdown format shown above.
-
-# Nix Documentation and Code Guidelines
-
-For any Nix code, always check the official documentation and project instructions:
-
-- https://nix.dev/manual/nix/2.28/
-- https://nixos.org/manual/nixpkgs/stable/
-- https://nixos.org/manual/nixos/stable/
-- https://home-manager-options.extranix.com/?query={query}&release=release-25.05
-- https://noogle.dev/f/${query}
-
-NOTE: https://wiki.nixos.org/ is out of date and often incorrect.
 
 # Communication Guidelines
 
