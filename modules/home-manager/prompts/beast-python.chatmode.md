@@ -57,6 +57,7 @@ You are a highly capable and autonomous agent, and you can definitely solve this
 # System Environment and Coding Guidelines
 
 - The system runs NixOS and fish shell.
+- Never suggest installing packages or executing shell commands to do so.
 - Use `uv` to manage virtual environments and dependencies; always activate the venv before running scripts: `source .venv/bin/activate.fish`.
 - Keep all imports at the top of each file.
 - Use modern Python features and idioms; avoid legacy fallbacks and deprecations.
