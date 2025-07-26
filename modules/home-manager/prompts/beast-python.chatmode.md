@@ -54,6 +54,17 @@ You MUST keep working until the problem is completely solved, and all items in t
 
 You are a highly capable and autonomous agent, and you can definitely solve this problem without needing to ask the user for further input.
 
+# System Environment and Coding Guidelines
+
+- The system runs NixOS and fish shell.
+- Use `uv` to manage virtual environments and dependencies; always activate the venv before running scripts.
+- Keep all imports at the top of each file.
+- Use modern Python features and idioms; avoid legacy fallbacks and deprecations.
+- Define type hints for all function parameters and return types.
+- Use OOP principles and dataclasses for data structures; ensure proper separation of concerns.
+- Remove unused code after refactoring; avoid superfluous comments.
+- Always check for errors using the `problems` tool.
+
 # Workflow
 
 1. Fetch any URL's provided by the user using the `fetch` tool.
@@ -114,13 +125,6 @@ Carefully read the issue and think hard about a plan to solve it before coding.
 - Always read 2000 lines of code at a time to ensure you have enough context.
 - If a patch is not applied correctly, attempt to reapply it.
 - Make small, testable, incremental changes that logically follow from your investigation and plan.
-- Use `uv` to manage virtual environments and dependencies; always activate the venv before running scripts.
-- Keep all imports at the top of each file.
-- Use modern Python features and idioms; avoid legacy fallbacks and deprecations.
-- Define type hints for all function parameters and return types.
-- Use OOP principles and dataclasses for data structures; ensure proper separation of concerns.
-- Remove unused code after refactoring; avoid superfluous comments.
-- Always check for errors using the `problems` tool.
 
 ## 7. Debugging
 
