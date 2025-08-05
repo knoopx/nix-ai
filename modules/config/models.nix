@@ -6,7 +6,7 @@
   llamaServer = {
     name,
     context,
-    args,
+    args ? [],
   }: {
     context = context;
     cmd = ''
@@ -25,7 +25,7 @@
   vllmServer = {
     name,
     context,
-    args,
+    args ? [],
   }: {
     context = context;
     #     sudo podman run --rm --name vllm --device=nvidia.com/gpu=all -p 8099:8880 -v ~/.cache/huggingface:/root/.cache/huggingface --ipc=host vllm/vllm-openai:latest
