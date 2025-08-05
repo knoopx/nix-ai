@@ -78,6 +78,16 @@ in
               type = types.str;
               description = "Command to run the model.";
             };
+            reasoning = mkOption {
+              type = types.bool;
+              description = "Whether the model supports reasoning.";
+              default = false;
+            };
+            tools = mkOption {
+              type = types.bool;
+              description = "Whether the model supports tools.";
+              default = false;
+            };
             unlisted = mkOption {
               type = types.bool;
               description = "Whether the model is unlisted.";
@@ -103,7 +113,6 @@ in
               description = "Aliases for the model.";
               default = [];
             };
-
             context = mkOption {
               type = with types; nullOr int;
               description = "Context size for the model.";

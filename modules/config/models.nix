@@ -62,7 +62,9 @@ in {
 
       "qwen3-coder-30b-a3b-instruct" = llamaServer {
         name = "unsloth/Qwen3-Coder-30B-A3B-Instruct-1M-GGUF:IQ4_NL";
-        context = 32768;
+        context = 64000;
+        reasoning = true;
+        tools = true;
         args = [
           "--cache-type-k q8_0"
           "--cache-type-v q8_0"
@@ -83,7 +85,9 @@ in {
 
       "gpt-oss-20b" = vllmServer {
         name = "unsloth/gpt-oss-20b-GGUF";
-        context = 128000;
+        reasoning = true;
+        tools = true;
+        context = 131072;
       };
 
       "kokoro" = {
