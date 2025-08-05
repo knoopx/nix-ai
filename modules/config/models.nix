@@ -6,9 +6,11 @@
   llamaServer = {
     name,
     context,
+    reasoning ? false,
+    tools ? false,
     args ? [],
   }: {
-    context = context;
+    inherit context reasoning tools;
     cmd = ''
       ${pkgs.llama-cpp}/bin/llama-server -hf ${name} --ctx-size ${toString context} --port ''${PORT} \
         ${lib.concatStringsSep " " args}
@@ -18,9 +20,11 @@
   vllmServer = {
     name,
     context,
+    reasoning ? false,
+    tools ? false,
     args ? [],
   }: {
-    context = context;
+    inherit context reasoning tools;
     cmd = ''
       ${pkgs.podman}/bin/podman run --rm --name vllm --device=nvidia.com/gpu=all -p ''${PORT}:8880 \
         -v /var/cache/huggingface/:/root/.cache/huggingface/ \
