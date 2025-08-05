@@ -33,7 +33,7 @@
     cmd = ''
       ${pkgs.podman}/bin/podman run --rm --name vllm --device=nvidia.com/gpu=all -p ''${PORT}:8880 \
         -v /var/cache/huggingface/:/root/.cache/huggingface/ \
-        ghcr.io/vllm-project/vllm:latest ${name}  \
+        vllm/vllm-openai:latest ${name}  \
         ${lib.concatStringsSep " " args}
     '';
   };
