@@ -137,6 +137,27 @@ in {
         ];
       };
 
+      "gpt-oss-20b" = llamaServer {
+        name = "unsloth/gpt-oss-20b-GGUF";
+        context = 128000;
+        args = [
+          "--cache-type-k q8_0"
+          "--cache-type-v q8_0"
+          "--flash-attn"
+          "--jinja"
+          "--metrics"
+          # "--min-p 0.01"
+          "--no-context-shift"
+          "--no-mmap"
+          # "--reasoning-format deepseek"
+          "--slots"
+          # "--temp 0.6"
+          # "--top-k 40"
+          # "--top-p 0.95"
+          "-ngl 99"
+        ];
+      };
+
       "kokoro" = {
         unlisted = true;
         cmd = ''
