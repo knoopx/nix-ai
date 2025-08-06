@@ -11,8 +11,15 @@
     args ? [],
   }: {
     inherit context reasoning tools;
+    # cmd = ''
+    #   ${pkgs.llama-cpp}/bin/llama-server -hf ${name} --ctx-size ${toString context} --port ''${PORT} \
+    #     ${lib.concatStringsSep " " args}
+    # '';
     cmd = ''
-      ${pkgs.llama-cpp}/bin/llama-server -hf ${name} --ctx-size ${toString context} --port ''${PORT} \
+      ${pkgs.podman}/bin/podman run --rm --name llama-server --device=nvidia.com/gpu=all --ipc=host -p ''${PORT}:8080 \
+        -v /var/cache/llama.cpp/:/root/.cache/llama.cpp/ \
+        ghcr.io/ggml-org/llama.cpp:server-cuda \
+        -hf ${name} --ctx-size ${toString context} \
         ${lib.concatStringsSep " " args}
     '';
   };
@@ -28,7 +35,7 @@
     cmd = ''
       ${pkgs.podman}/bin/podman run --rm --name vllm --device=nvidia.com/gpu=all -p ''${PORT}:8880 \
         -v /var/cache/huggingface/:/root/.cache/huggingface/ \
-        vllm/vllm-openai:latest ${name}  \
+        vllm/vllm-openai:gptoss --model ${name}  \
         ${lib.concatStringsSep " " args}
     '';
   };
@@ -78,7 +85,7 @@ in {
         ];
       };
 
-      "gpt-oss-20b" = vllmServer {
+      "gpt-oss-20b" = llamaServer {
         name = "unsloth/gpt-oss-20b-GGUF";
         reasoning = true;
         tools = true;
