@@ -90,6 +90,17 @@ in {
         reasoning = true;
         tools = true;
         context = 131072;
+        args = [
+          "--cache-type-k q8_0"
+          "--cache-type-v q8_0"
+          "--flash-attn"
+          "--jinja"
+          "--metrics"
+          "--no-context-shift"
+          "--no-mmap"
+          "--slots"
+          "-ngl 99"
+        ];
       };
 
       "kokoro" = {
