@@ -5,12 +5,13 @@
 }: let
   llamaServer = {
     name,
+    id ? name,
     context,
     reasoning ? false,
     tool_call ? false,
     args ? [],
   }: {
-    inherit context reasoning tool_call;
+    inherit id context reasoning tool_call;
     # cmd = ''
     #   ${pkgs.llama-cpp}/bin/llama-server -hf ${name} --ctx-size ${toString context} --port ''${PORT} \
     #     ${lib.concatStringsSep " " args}
@@ -59,7 +60,8 @@ in {
         ];
       };
 
-      "qwen3-coder-30b-a3b-instruct" = llamaServer {
+      "qwen/qwen3-30b-a3b-instruct-2507" = llamaServer {
+        id = "qwen/qwen3-30b-a3b-instruct-2507";
         name = "unsloth/Qwen3-Coder-30B-A3B-Instruct-1M-GGUF:IQ4_NL";
         context = 64000;
         reasoning = true;
