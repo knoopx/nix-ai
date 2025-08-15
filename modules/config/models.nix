@@ -88,35 +88,41 @@ in {
         tools = true;
         context = 64000;
         # context = 131072;
-         args = [
-           "--cache-type-k q8_0"
-           "--cache-type-v q8_0"
-           "--flash-attn"
-           "--jinja"
-           "--metrics"
-           "--top-k 40"
-           "--top-p 0.95"
-           "--temp 0.6"
-           "--threads -1"
-           "-ngl 99"
-         ];
+        args = [
+          "--cache-type-k q8_0"
+          "--cache-type-v q8_0"
+          "--flash-attn"
+          "--jinja"
+          "--metrics"
+          "--top-k 40"
+          "--top-p 0.95"
+          "--temp 0.6"
+          "--threads -1"
+          "-ngl 99"
+        ];
       };
 
       "gemma-3n-E4B-it" = llamaServer {
         name = "unsloth/gemma-3n-E4B-it-GGUF:F16";
         context = 32768;
-         args = [
-           "--cache-type-k q8_0"
-           "--cache-type-v q8_0"
-           "--flash-attn"
-           "--jinja"
-           "--metrics"
-           "--top-k 40"
-           "--top-p 0.95"
-           "--temp 0.6"
-           "--threads -1"
-           "-ngl 99"
-         ];
+        args = let
+          template = pkgs.fetchurl {
+            url = "https://huggingface.co/unsloth/gemma-3n-E4B-it-GGUF/raw/main/template";
+            sha256 = "0v...";
+          };
+        in [
+          "--cache-type-k q8_0"
+          "--cache-type-v q8_0"
+          "--flash-attn"
+          "--jinja"
+          "--metrics"
+          "--top-k 40"
+          "--top-p 0.95"
+          "--temp 0.6"
+          "--threads -1"
+          "--chat-template ${template}"
+          "-ngl 99"
+        ];
       };
 
       "kokoro" = {
