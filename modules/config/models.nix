@@ -58,7 +58,11 @@ in {
           "--temp 0.6"
           "--top-k 40"
           "--top-p 0.95"
+          "--threads -1"
           "-ngl 99"
+          "--temp 1.0"
+          "-top-p 1.0"
+          "--top-k 0"
         ];
       };
 
@@ -91,6 +95,14 @@ in {
         tools = true;
         context = 131072;
         args = [
+          "-ngl 99"
+          "--top-k 40"
+          "--top-p 0.95"
+          "--threads -1"
+          "--temp 1.0"
+          "--top-p 1.0"
+          "--top-k 0"
+
           # "--cache-type-k q8_0"
           # "--cache-type-v q8_0"
           # "--flash-attn"
