@@ -16,7 +16,7 @@
     #     ${lib.concatStringsSep " " args}
     # '';
     cmd = ''
-      ${pkgs.podman}/bin/podman run --rm --name llama-server --device=nvidia.com/gpu=all --ipc=host -p ''${PORT}:8080 \
+      ${pkgs.podman}/bin/podman run --rm --name llama-server --replace --device=nvidia.com/gpu=all --ipc=host -p ''${PORT}:8080 \
         -v /var/cache/llama.cpp/:/root/.cache/llama.cpp/ \
         ghcr.io/ggml-org/llama.cpp:server-cuda \
         -hf ${name} --ctx-size ${toString context} \
@@ -33,7 +33,7 @@
   }: {
     inherit context reasoning tools;
     cmd = ''
-      ${pkgs.podman}/bin/podman run --rm --name vllm --device=nvidia.com/gpu=all -p ''${PORT}:8880 \
+      ${pkgs.podman}/bin/podman run --rm --name vllm --replace --device=nvidia.com/gpu=all -p ''${PORT}:8880 \
         -v /var/cache/huggingface/:/root/.cache/huggingface/ \
         vllm/vllm-openai:gptoss --model ${name}  \
         ${lib.concatStringsSep " " args}
