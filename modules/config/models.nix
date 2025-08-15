@@ -84,7 +84,8 @@ in {
         ];
       };
 
-      "gpt-oss-20b" = llamaServer {
+      "openai/gpt-oss-20b" = llamaServer {
+        id = "openai/gpt-oss-20b";
         name = "unsloth/gpt-oss-20b-GGUF";
         reasoning = true;
         tool_call = true;

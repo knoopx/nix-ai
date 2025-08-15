@@ -83,7 +83,7 @@ in
               description = "Whether the model supports reasoning.";
               default = false;
             };
-            tools = mkOption {
+            tool_call = mkOption {
               type = types.bool;
               description = "Whether the model supports tools.";
               default = false;
