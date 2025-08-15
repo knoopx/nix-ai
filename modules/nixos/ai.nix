@@ -74,6 +74,11 @@ in
         description = "AI model configuration";
         type = types.attrsOf (types.submodule {
           options = {
+            id = mkOption {
+              type = with types; nullOr str;
+              description = "Unique identifier for the model.";
+              default = null;
+            };
             cmd = mkOption {
               type = types.str;
               description = "Command to run the model.";
