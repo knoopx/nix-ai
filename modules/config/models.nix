@@ -7,10 +7,10 @@
     name,
     context,
     reasoning ? false,
-    tools ? false,
+    tool_call ? false,
     args ? [],
   }: {
-    inherit context reasoning tools;
+    inherit context reasoning tool_call;
     # cmd = ''
     #   ${pkgs.llama-cpp}/bin/llama-server -hf ${name} --ctx-size ${toString context} --port ''${PORT} \
     #     ${lib.concatStringsSep " " args}
@@ -28,10 +28,10 @@
     name,
     context,
     reasoning ? false,
-    tools ? false,
+    tool_call ? false,
     args ? [],
   }: {
-    inherit context reasoning tools;
+    inherit context reasoning tool_call;
     cmd = ''
       ${pkgs.podman}/bin/podman run --rm --name vllm --replace --device=nvidia.com/gpu=all -p ''${PORT}:8880 \
         -v /var/cache/huggingface/:/root/.cache/huggingface/ \
@@ -63,7 +63,7 @@ in {
         name = "unsloth/Qwen3-Coder-30B-A3B-Instruct-1M-GGUF:IQ4_NL";
         context = 64000;
         reasoning = true;
-        tools = true;
+        tool_call = true;
         args = [
           "--cache-type-k q8_0"
           "--cache-type-v q8_0"
@@ -85,7 +85,7 @@ in {
       "gpt-oss-20b" = llamaServer {
         name = "unsloth/gpt-oss-20b-GGUF";
         reasoning = true;
-        tools = true;
+        tool_call = true;
         context = 64000;
         # context = 131072;
         args = [
@@ -102,15 +102,11 @@ in {
         ];
       };
 
-      "gemma-3n-E4B-it" = llamaServer {
+      "google/gemma-3n-e4b-it" = llamaServer {
+        id = "google/gemma-3n-e4b-it";
         name = "unsloth/gemma-3n-E4B-it-GGUF:F16";
         context = 32768;
-        args = let
-          template = pkgs.fetchurl {
-            url = "https://huggingface.co/unsloth/gemma-3n-E4B-it-GGUF/raw/main/template";
-            sha256 = "0v...";
-          };
-        in [
+        args = [
           "--cache-type-k q8_0"
           "--cache-type-v q8_0"
           "--flash-attn"
@@ -120,7 +116,6 @@ in {
           "--top-p 0.95"
           "--temp 0.6"
           "--threads -1"
-          "--chat-template ${template}"
           "-ngl 99"
         ];
       };
