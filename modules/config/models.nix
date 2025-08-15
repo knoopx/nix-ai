@@ -93,29 +93,23 @@ in {
         name = "unsloth/gpt-oss-20b-GGUF";
         reasoning = true;
         tools = true;
-        context = 131072;
+        context = 64000;
+        # context = 131072;
         args = [
+          "-ngl 99"
           "--cache-type-k q8_0"
           "--cache-type-v q8_0"
           "--flash-attn"
           "--jinja"
-          "-ngl 99"
-          "--top-k 40"
-          "--top-p 0.95"
           "--threads -1"
           "--temp 1.0"
           "--top-p 1.0"
           "--top-k 0"
-
-          # "--cache-type-k q8_0"
-          # "--cache-type-v q8_0"
-          # "--flash-attn"
           # "--jinja"
           # "--metrics"
           # "--no-context-shift"
           # "--no-mmap"
           # "--slots"
-          # "-ngl 99"
         ];
       };
 
