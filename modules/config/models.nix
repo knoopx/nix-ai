@@ -95,6 +95,10 @@ in {
         tools = true;
         context = 131072;
         args = [
+          "--cache-type-k q8_0"
+          "--cache-type-v q8_0"
+          "--flash-attn"
+          "--jinja"
           "-ngl 99"
           "--top-k 40"
           "--top-p 0.95"
